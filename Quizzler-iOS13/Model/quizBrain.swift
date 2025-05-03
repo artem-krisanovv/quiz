@@ -10,16 +10,16 @@ import Foundation
 
 struct QuizBrain {
     let quiz = [
-        Question(question: "2+2=4", answers: "True"),
-        Question(question: "967+2=969", answers: "True"),
-        Question(question: "542*2=1084", answers: "True"),
-        Question(question: "1290-476=389", answers: "False"),
-        Question(question: "894*2=1788", answers: "True"),
-        Question(question: "9548-2345=7203", answers: "True"),
-        Question(question: "1452*2=2305", answers: "False"),
-        Question(question: "658-392=266", answers: "False"),
-        Question(question: "159*2=318", answers: "True"),
-        Question(question: "Finnaly: 147-369=-222", answers: "True")
+        Question(question: "Which is the largest organ in the human body?", answers: ["Heart", "Skin", "Large Intestine"], correctAnswer: "Skin"),
+        Question(question: "Five dollars is worth how many nickels?", answers: ["25", "50", "100"], correctAnswer: "100"),
+        Question(question: "What do the letters in the GMT time zone stand for?", answers: ["Global Meridian Time", "Greenwich Mean Time", "General Median Time"], correctAnswer: "Greenwich Mean Time"),
+        Question(question: "What is the French word for 'hat'?", answers: ["Chapeau", "Écharpe", "Bonnet"], correctAnswer: "Chapeau"),
+        Question(question: "In past times, what would a gentleman keep in his fob pocket?", answers: ["Notebook", "Handkerchief", "Watch"], correctAnswer: "Watch"),
+        Question(question: "How would one say goodbye in Spanish?", answers: ["Au Revoir", "Adiós", "Salir"], correctAnswer: "Adiós"),
+        Question(question: "Which of these colours is NOT featured in the logo for Google?", answers: ["Green", "Orange", "Blue"], correctAnswer: "Orange"),
+        Question(question: "What alcoholic drink is made from molasses?", answers: ["Rum", "Whisky", "Gin"], correctAnswer: "Rum"),
+        Question(question: "What type of animal was Harambe?", answers: ["Panda", "Gorilla", "Crocodile"], correctAnswer: "Gorilla"),
+        Question(question: "Where is Tasmania located?", answers: ["Indonesia", "Australia", "Scotland"], correctAnswer: "Australia")
     ]
     
     var questionNumber = 0
@@ -36,7 +36,7 @@ struct QuizBrain {
     
     mutating func checkAnswer(_ userAnswer: String) -> Bool {
         if questionNumber < quiz.count {
-            if userAnswer == quiz[questionNumber].answers {
+            if userAnswer == quiz[questionNumber].correctAnswer {
                 score += 1
                 return true
             } else {
@@ -52,7 +52,15 @@ struct QuizBrain {
         if questionNumber < quiz.count  {
             return quiz[questionNumber].question
         } else {
-            return quiz[0].question
+            return quiz.first?.question ?? ""
+        }
+    }
+    
+    func getAnswers(buttonNumber: String) -> String {
+        if questionNumber < quiz.count  {
+            return quiz[questionNumber].answers[Int(buttonNumber) ?? 0]
+        } else {
+            return ""
         }
     }
     
